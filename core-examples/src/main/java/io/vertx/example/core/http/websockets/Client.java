@@ -19,10 +19,11 @@ public class Client extends AbstractVerticle {
   public void start() throws Exception {
     HttpClient client = vertx.createHttpClient();
 
-    client.websocket(8080, "localhost", "/some-uri", websocket -> {
+    client.websocket(8080, "localhost", "/packet/1", websocket -> {
       websocket.handler(data -> {
         System.out.println("Received data " + data.toString("ISO-8859-1"));
         client.close();
+
       });
       websocket.writeBinaryMessage(Buffer.buffer("Hello world"));
     });
